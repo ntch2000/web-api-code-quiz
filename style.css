@@ -1,3 +1,14 @@
 h1 {
   color: blue;
 }
+
+/*changes the color of the navbar-brand text to purple */
+.navbar-light .navbar-brand {
+  color: purple;
+}
+
+/* styles the timer */
+#timer {
+  font-weight: bold;
+  font-size: medium;
+}
