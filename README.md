@@ -33,3 +33,7 @@ Web application that allows users to take a code quiz on web APIs
 
 - shows list of initials of players and their scores
 - has a go back button and a clear scores button
+
+incorrect answers subtract timer by -15s
+
+correct/incorrect prompts only stay on screen for about 1 second
