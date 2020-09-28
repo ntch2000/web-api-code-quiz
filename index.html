@@ -28,24 +28,60 @@
         <span class="ml-auto" id="timer"></span>
       </nav>
     </header>
-    <main class="container my-5">
-      <div class="row">
-        <div class="col-8">
-          <h1 id="heading">Coding Quiz Challenge</h1>
+    <main>
+
+      <!-- Main screen with the instructions of the quiz and the start button -->
+      <div class="container my-5 text-center" id="main-quiz-start">
+        <div class="row">
+          <div class="col-8">
+            <h1>Coding Quiz Challenge</h1>
+            <p>
+              Try to answer the following code-related questions within the time
+              limit. Keep in mind that incorrect answers will penalize your
+              score/time by ten seconds!
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <button type="button" class="btn btn-primary" id="start-quiz">
+              Start Quiz
+            </button>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-8" id="quiz-container">
-          <!-- <ul id="answers"></ul> -->
+
+      <!-- container where the quiz questions and answer options will be shown after the start of the quiz -->
+      <div class="container my-5" id="quiz-container">
+        <div class="row">
+          <div class="col-8">
+            <h1 id="heading"></h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8" id="answers"></div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-8">
-          <button type="button" class="btn btn-primary" id="start-quiz">
-            Start Quiz
-          </button>
+
+      <!-- container where the user's score appears and they are able to enter their initials into the highscore page -->
+      <div class="container my-5 text-left" id="score-page">
+        <div class="row">
+          <div class="col-8">
+            <h1 id="completion-message"></h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <p id="score"></p>
+          </div>
+        </div>
+        <div class="row">
+          <form class="col-8" id="input-form">
+            <label id="initials-input"> </label>
+          </form>
         </div>
       </div>
+      <div>
     </main>
 
     <script src="script.js"></script>
