@@ -13,6 +13,9 @@ var instructions = document.createElement("p");
 var answerChoices = document.createElement("button");
 
 var timerSeconds = 0;
+var quizScore = 0;
+
+var interval;
 
 // sets the index of the first object in the questionBank array to be displayed in the quiz.
 var questionIndex = 0;
@@ -51,45 +54,60 @@ function loadQuizInstructions() {
   quizContainer.appendChild(instructions);
 }
 // startQuiz function that begins the quiz
+// function startQuiz() {
+//   //calls the function to start the timer
+//   quizTimer();
+// }
+
+// function that starts the quiz
 function startQuiz() {
-  //calls the function to start the timer
-  quizTimer();
-
+  // sets the timer for the quiz
+  timerSeconds = 76;
+  // removed the start quiz button
   startQuizButton.parentNode.removeChild(startQuizButton);
+
+  //removed the instructions
   instructions.parentNode.removeChild(instructions);
+  questionHeading.textContent = "";
 
-  renderQuestion(questionIndex);
-}
-
-// function that starts the timer for the quiz
-function quizTimer() {
-  timerSeconds = 30;
   var interval = setInterval(function () {
     timerSeconds--;
     timerDisplay.textContent = "Time: " + timerSeconds;
 
-    if (timerSeconds === 0) {
+    // executes the function to display the questions
+    renderQuestion(questionIndex);
+
+    // stops the time display when time is up or when the last question is answered
+    if (timerSeconds === 0 || questionIndex === questionBank.length) {
       clearInterval(interval);
-      console.log("Time is up!");
     }
   }, 1000);
 }
 
 function renderQuestion(index) {
-  // renders the questions
-  questionHeading.textContent = questionBank[index].question;
+  // conditional to check if the game end conditions are met, if so, the game end function is executed
+  if (timerSeconds === 0 || index === questionBank.length) {
+    quizScore = timerSeconds;
+    gameEnd();
+  } else {
+    // renders the questions
+    questionHeading.textContent = questionBank[index].question;
 
-  // loops through the choices array property to create the answer options
-  for (var i = 0; i < questionBank[index].choices.length; i++) {
-    var answerChoices = document.createElement("button");
+    // clears the quizContainer content before generating the answer choice buttons
+    quizContainer.innerHTML = "";
 
-    // sets the attributes for the created buttons and adds the answer text
-    answerChoices.setAttribute("class", "btn btn-primary btn-block");
-    answerChoices.setAttribute("index", i);
-    answerChoices.textContent = questionBank[index].choices[i];
+    // loops through the choices array property to create the answer options
+    for (var i = 0; i < questionBank[index].choices.length; i++) {
+      var answerChoices = document.createElement("button");
 
-    // adds the answer button choices to the page
-    quizContainer.appendChild(answerChoices);
+      // sets the attributes for the created buttons and adds the answer text
+      answerChoices.setAttribute("class", "btn btn-primary btn-block");
+      answerChoices.setAttribute("index", i);
+      answerChoices.textContent = questionBank[index].choices[i];
+
+      // adds the answer button choices to the page
+      quizContainer.appendChild(answerChoices);
+    }
   }
 }
 
@@ -104,13 +122,52 @@ function checkAnswers(event) {
     questionBank[questionIndex].choices[answerIndex] ===
       questionBank[questionIndex].answer
   ) {
-    console.log(answerIndex);
-    alert("Correct!");
+    // increments to the next question and calls the renderQuestion function again with the new question index
+    questionIndex++;
+    renderQuestion(questionIndex);
   } else {
-    console.log(answerIndex);
+    // subtract 10 seconds for incorrect answer, increments to the next question and calls renderQuestion function again with the new question index
+    timerSeconds -= 10;
+    questionIndex++;
+    renderQuestion(questionIndex);
   }
 }
 
+// function displays the screen to enter the user's initials and score to the high score board
+
+//!! ERROR WHEN CLICKING INPUTBOX DUE TO EVENTLISTENER ON QUIZCONTAINER. MAY HAVE TO CREATE A NEW VARIABLE OR SOMEHOW CANCEL EVENTLISTENER
+function gameEnd() {
+  clearInterval(interval);
+  var scoreForm = document.createElement("form");
+  var initialsInput = document.createElement("input");
+  var submitBtn = document.createElement("button");
+  var inputLabel = document.createElement("label");
+
+  // displays the all done message
+  questionHeading.textContent = "All done!";
+
+  // empties the html code for the answer buttons
+  quizContainer.innerHTML = "";
+
+  // displays the user's score
+  instructions.textContent = "Your final score is " + quizScore + "!";
+
+  quizContainer.appendChild(instructions);
+  inputLabel.textContent = "Enter Initials: ";
+  scoreForm.appendChild(inputLabel);
+  initialsInput.setAttribute("id", "submit-score");
+  scoreForm.appendChild(initialsInput);
+  submitBtn.textContent = "Submit";
+  submitBtn.setAttribute("class", "btn btn-primary");
+  scoreForm.appendChild(submitBtn);
+
+  quizContainer.appendChild(scoreForm);
+
+  // create element to display score
+
+  // create an input form to input initials with a submit button
+  //alert("the game is ended");
+}
 // calls the function to load the instructions when the page loads
 window.onload = loadQuizInstructions();
 startQuizButton.addEventListener("click", startQuiz);
