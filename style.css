@@ -10,17 +10,23 @@
 }
 
 /* #heading {
-  text-align: center;
-}
+    text-align: center;
+  }
+  
+  p {
+    text-align: center;
+  } */
 
-p {
-  text-align: center;
-} */
-
-div {
-  text-align: center;
-}
+/* div {
+    text-align: center;
+  } */
 
 .btn-primary {
   background-color: purple;
+  border: solid black 1px;
+}
+
+/* aligns all question answer buttons to the left and stacks them vertically */
+#answers .btn {
+  display: block;
 }
