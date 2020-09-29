@@ -37,3 +37,8 @@ Web application that allows users to take a code quiz on web APIs
 incorrect answers subtract timer by -15s
 
 correct/incorrect prompts only stay on screen for about 1 second
+
+### Development notes
+
+- refactored the code to utilize html containers to display the application content
+  - originally tried to dynamically generate all elements

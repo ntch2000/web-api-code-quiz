@@ -1,12 +1,24 @@
 console.log("hello world");
 
+var timerDisplay = document.getElementById("timer");
+// gets the main page container
 var mainPage = document.getElementById("main-quiz-start");
+
+// gets the start button on the main page
 var startButton = document.getElementById("start-quiz");
 
+// gets the heading element for the quiz questions
 var headingQuestion = document.getElementById("heading");
+
+// gets the answers div to generate the buttons under
 var answerChoices = document.getElementById("answers");
 // sets the index of the questionBank array to the first object
+
+var timeLeft = 75;
+var interval;
 var questionIndex = 0;
+
+var finalScore;
 
 var questionBank = [
   {
@@ -53,6 +65,10 @@ var questionBank = [
   },
 ];
 
+// window.onload = function () {
+//   timerDisplay.textContent = "Time: 0";
+// };
+
 function startQuiz() {
   // sets the display of the instruction page to none, hiding it from the user
   mainPage.style.display = "none";
@@ -61,11 +77,30 @@ function startQuiz() {
   renderQuestions(questionIndex);
 }
 
+function startTimer() {
+  // displays the timer
+  timerDisplay.textContent = "Time: " + timeLeft;
+  interval = setInterval(function () {
+    timeLeft--;
+    // displays the updated time
+    timerDisplay.textContent = "Time: " + timeLeft;
+
+    // sets the user's score to the time remaining
+    finalScore = timeLeft;
+    if (timeLeft === 0) {
+      clearInterval(interval);
+    }
+  }, 1000);
+}
+
 // function displays the questions and answers for the quiz
 function renderQuestions(index) {
-  console.log(index);
+  //console.log(timerDisplay.textContent);
+  //console.log(finalScore);
 
   if (index === questionBank.length) {
+    // stops the timer and executes the score screen function
+    clearInterval(interval);
     renderScoreScreen();
   } else {
     // clears the answer buttons from the page - important for when the next question is rendered.
@@ -95,6 +130,7 @@ function renderQuestions(index) {
 }
 
 function checkAnswer(event) {
+  // checks to see if the answer button clicked is equal to the correct answer for the question
   var answerIndex = event.target.getAttribute("data-index");
   event.preventDefault();
   if (
@@ -102,22 +138,37 @@ function checkAnswer(event) {
     questionBank[questionIndex].choices[answerIndex] ===
       questionBank[questionIndex].answer
   ) {
+    // if the answer is correct, the question index is incremented and the next question is displayed
     questionIndex++;
     renderQuestions(questionIndex);
   } else {
+    // if the answer is incorrect, 10 seconds are subtracted from the time, the question index is incremented and the next question is displayed
+    timeLeft -= 10;
     questionIndex++;
     renderQuestions(questionIndex);
   }
 }
 
-// displays the score screen content after the game ends (either the user's time is up or they answer all questions)
+// displays the score screen content after the game ends (either the user's time is up or they answer all questions).
 function renderScoreScreen() {
-  var quizContainer = document.getElementById("quiz-container");
+  //var finalScore = timeLeft;
+  //console.log(timeLeft);
 
   // clears the quiz questions and answers content from the page
+  var quizContainer = document.getElementById("quiz-container");
   quizContainer.innerHTML = "";
+
+  // gets the id of the heading element and adds the quiz completion text
+  var completionMessage = document.getElementById("completion-message");
+  completionMessage.textContent = "All done!";
+
+  // gets the id of the paragraph element and outputs the user's score
+  var scoreMessage = document.getElementById("score");
+  scoreMessage.textContent = "Your final score is: " + finalScore;
+
   console.log("Game over!");
 }
 // when the start button is clicked, the quiz begins
 startButton.addEventListener("click", startQuiz);
+startButton.addEventListener("click", startTimer);
 answerChoices.addEventListener("click", checkAnswer);
