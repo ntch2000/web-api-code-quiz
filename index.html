@@ -29,7 +29,6 @@
       </nav>
     </header>
     <main>
-
       <!-- Main screen with the instructions of the quiz and the start button -->
       <div class="container my-5 text-center" id="main-quiz-start">
         <div class="row">
@@ -44,7 +43,11 @@
         </div>
         <div class="row">
           <div class="col-8">
-            <button type="button" class="btn btn-primary" id="start-quiz">
+            <button
+              type="button"
+              class="btn btn-primary rounded"
+              id="start-quiz"
+            >
               Start Quiz
             </button>
           </div>
@@ -59,7 +62,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-8" id="answers"></div>
+          <div id="answers"></div>
         </div>
       </div>
 
@@ -72,16 +75,18 @@
         </div>
         <div class="row">
           <div class="col-8">
-            <p id="score"></p>
+            <p id="score" class="mt-2"></p>
           </div>
         </div>
         <div class="row">
-          <form class="col-8" id="input-form">
-            <label id="initials-input"> </label>
+          <form class="col-8 form-inline" id="input-form">
+            <label id="initials-input" class="mx-1"> </label>
           </form>
         </div>
+        <div class="row">
+          <div class="col-8" id="answer-feedback"></div>
+        </div>
       </div>
-      <div>
     </main>
 
     <script src="script.js"></script>

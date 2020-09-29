@@ -30,3 +30,8 @@
 #answers .btn {
   display: block;
 }
+
+.feedback {
+  border-top: grey solid 1px;
+  font-style: italic;
+}

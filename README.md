@@ -38,6 +38,8 @@ incorrect answers subtract timer by -15s
 
 correct/incorrect prompts only stay on screen for about 1 second
 
+- hide score screen during quiz and show once quiz is completed rather than dynamically adding the html to the page in js
+
 ### Development notes
 
 - refactored the code to utilize html containers to display the application content
