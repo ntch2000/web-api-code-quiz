@@ -22,7 +22,7 @@
   } */
 
 .btn-primary {
-  background-color: purple;
+  background-color: #673ca0;
   border: solid black 1px;
 }
 
@@ -34,4 +34,8 @@
 .feedback {
   border-top: grey solid 1px;
   font-style: italic;
+}
+
+#score-page {
+  display: none;
 }

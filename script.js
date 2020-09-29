@@ -17,6 +17,9 @@ var answerChoices = document.getElementById("answers");
 // container that will have the answer feedback information on the score screen  -- displays after the last question of the quiz
 var feedbackContainer = document.getElementById("answer-feedback");
 
+// gets the div element for the score screen
+var scorePage = document.getElementById("score-page");
+
 var timeLeft = 75;
 var interval;
 var questionIndex = 0;
@@ -162,27 +165,12 @@ function renderScoreScreen() {
   var quizContainer = document.getElementById("quiz-container");
   quizContainer.innerHTML = "";
 
-  // gets the id of the heading element and adds the quiz completion text
-  var completionMessage = document.getElementById("completion-message");
-  completionMessage.textContent = "All done!";
+  // shows the score-page content
+  scorePage.style.display = "block";
 
   // gets the id of the paragraph element and outputs the user's score
   var scoreMessage = document.getElementById("score");
   scoreMessage.textContent = "Your final score is: " + finalScore;
-
-  var userInitials = document.getElementById("initials-input");
-  userInitials.textContent = "Enter Initials: ";
-
-  var inputForm = document.getElementById("input-form");
-  var inputBox = document.createElement("input");
-  inputBox.setAttribute("class", "form-control-sm mx-2 w-25");
-  var subBtn = document.createElement("button");
-  subBtn.textContent = "Submit";
-  subBtn.setAttribute("class", "btn btn-primary rounded");
-
-  inputForm.append(userInitials);
-  inputForm.append(inputBox);
-  inputForm.append(subBtn);
 
   console.log("Game over!");
 }
@@ -238,7 +226,7 @@ function feedbackTimer() {
       feedbackContent.parentNode.removeChild(feedbackContent);
       clearInterval(interval);
     }
-  }, 800);
+  }, 500);
 }
 // when the start button is clicked, the quiz begins
 startButton.addEventListener("click", startQuiz);
