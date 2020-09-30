@@ -20,6 +20,8 @@ var feedbackContainer = document.getElementById("answer-feedback");
 // gets the div element for the score screen
 var scorePage = document.getElementById("score-page");
 
+var submitScoreBtn = document.getElementById("submit-scores");
+
 var timeLeft = 75;
 var interval;
 var questionIndex = 0;
@@ -75,6 +77,9 @@ var questionBank = [
     answer: "4. console.log",
   },
 ];
+
+// holds the scores
+var scoreArray = [];
 
 function startQuiz() {
   // sets the display of the instruction page to none, hiding it from the user
@@ -228,8 +233,34 @@ function feedbackTimer() {
     }
   }, 500);
 }
+
+// saves the user scores to an object in localStorage
+function saveScores() {
+  // get the user's initials from the input box
+  var initials = document.getElementById("initials").value;
+
+  // obtain the current scores object from local storage
+  var storedScoreArray = JSON.parse(localStorage.getItem("userScores"));
+
+  // if there are scores, sets the score array to the saved object array from local storage
+  if (storedScoreArray !== null) {
+    scoreArray = storedScoreArray;
+  }
+
+  // adds the new initials and scores to the array and saves those to local storage
+  scoreArray.push({ name: initials, score: finalScore });
+  localStorage.setItem("userScores", JSON.stringify(scoreArray));
+  console.log(scoreArray);
+}
 // when the start button is clicked, the quiz begins
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", startTimer);
 answerChoices.addEventListener("click", checkAnswer);
 answerChoices.addEventListener("click", answerStatus);
+
+submitScoreBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  saveScores();
+  console.log("this is a test");
+  window.location.href = "highscores.html";
+});

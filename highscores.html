@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title></title>
+    <title>Highscores</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -20,9 +20,27 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>High Scores</h1>
-    >
+    <main>
+      <div class="container my-5 py-5 text-left">
+        <div class="row">
+          <div class="col-8">
+            <h1>Highscores</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <ul class="list-group mt-3" id="scores"></ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8 mt-4">
+            <button class="btn btn-primary rounded">Go Back</button>
+            <button class="btn btn-primary rounded">Clear Highscores</button>
+          </div>
+        </div>
+      </div>
+    </main>
 
-    <script src="script.js" async defer></script>
+    <script src="highscores-script.js" async defer></script>
   </body>
 </html>
