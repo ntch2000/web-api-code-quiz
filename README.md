@@ -43,4 +43,8 @@ correct/incorrect prompts only stay on screen for about 1 second
 ### Development notes
 
 - refactored the code to utilize html containers to display the application content
+
   - originally tried to dynamically generate all elements
+
+  used the array sort function to sort the scores
+  watched (JavaScript Problem: Sorting an Array of Objects - All Things JavaScript, LLC)https://www.youtube.com/watch?v=0d76_2sksWY to help understand how the function works
