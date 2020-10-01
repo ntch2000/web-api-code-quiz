@@ -1,50 +1,82 @@
 # Web-API-Code-Quiz
 
-Web application that allows users to take a code quiz on web APIs
+## Descirption
 
-## Pseudo-code Notes
+This application helps users to familiarize themselves with JavaScript code. Coding assessments are one of the most important parts of an interview process and typically contain a combination of multiple-choice questions.
 
-- Top bar with timer and links to view high scores
+This application provides users with a time quiz to practice coding principles and logs the user's initials and score based on the time left after the quiz finishes. These scores are saved to local storage and will persist even when the page is reloaded.
 
-### Page 1
+## Table Of Contents
 
-- Coding Quiz Challenge heading
-- description/instructions for quiz
-- start button
+- [User Story](#user-story)
+- [Acceptance Criteria](#acceptance-criteria)
+- [Installation](#installation)
+- [Application Screenshot](#application-screenshot)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
 
-### Page 2
+## User Story
 
-- start button starts quiz
-- heading with the question
-  - 4 answers buttons numbered
-- once answer is selected
-  1. move to next question
-  2. display correct/wrong under questions
-  3. incorrect questions subtract time from clock
+```
+AS A coding boot camp student
+I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
+SO THAT I can gauge my progress compared to my peers
+```
 
-### Page 3
+## Acceptance Criteria
 
-- once all questions are answered or when timer reaches 0, game is over
-- completion shown as heading
-- score is shown
-- input box shown with button to submit to highscore screen
+```
+GIVEN I am taking a code quiz
+WHEN I click the start button
+THEN a timer starts and I am presented with a question
+WHEN I answer a question
+THEN I am presented with another question
+WHEN I answer a question incorrectly
+THEN time is subtracted from the clock
+WHEN all questions are answered or the timer reaches 0
+THEN the game is over
+WHEN the game is over
+THEN I can save my initials and score
+```
 
-### highscore screen
+## Installation
 
-- shows list of initials of players and their scores
-- has a go back button and a clear scores button
+In order to view this application, please visit the main page https://ntch2000.github.io/web-api-code-quiz/index.html.
 
-incorrect answers subtract timer by -15s
+To see the code base for this page, visit my github page https://github.com/ntch2000/web-api-code-quiz. The code can be viewed directly in the github repository or downloaded and viewed in Visual Studio Code.
 
-correct/incorrect prompts only stay on screen for about 1 second
+## Application Screenshots
 
-- hide score screen during quiz and show once quiz is completed rather than dynamically adding the html to the page in js
+![Quiz Start Page](./screenshots/Quiz-Main-Page.jpg "Quiz Start Page")
+_Sample application screenshot of the main quiz start page._
 
-### Development notes
+![Correct Answer](./screenshots/correct-answer.jpg "Correct Answer")
+_Sample application screenshot of a question with a correct answer feedback._
 
-- refactored the code to utilize html containers to display the application content
+![Wrong Answer](./screenshots/wrong-answer.jpg "Wrong Answer")
+_Sample application screenshot of a question with a wrong answer feedback._
 
-  - originally tried to dynamically generate all elements
+![Submit Initials and Score](./screenshots/initials-scores.jpg "Submit Initials and Score")
+_Sample application screenshot of the initials and score screen._
 
-  used the array sort function to sort the scores
-  watched (JavaScript Problem: Sorting an Array of Objects - All Things JavaScript, LLC)https://www.youtube.com/watch?v=0d76_2sksWY to help understand how the function works
+![High Scores Page](./images/password-length-prompt.jpg "High Scores Page")
+_Sample application screenshot of the high scores page._
+
+## Usage
+
+Users can start the quiz by clicking the 'Start Quiz' button and are asked to answer the questions that appear within the time limit. Feedback will be shown at the bottom of the answer to let users know whether they answered the questions correctly. An incorrect answer will result in the user losing 10 seconds of time from the timer in the top right of the screen.
+
+Once a question is answered, the next question will be displayed and the quiz will continue. After the last question is answered, the user will be shown the score screen where they will be able to enter their initials, view their score, and submit their score to the high scores page. These scores will remain in local storage until cleared. The user will then be able to go back and take the quiz again to try to beat their previous score.
+
+The scores on the high scores page are sorted by highest to lowest.
+
+## Credits
+
+- To properly sort the scores object, I used a video from [JavaScript Problem: Sorting an Array of Objects - All Things JavaScript, LLC](https://www.youtube.com/watch?v=0d76_2sksWY). This tutorial/example helped me understand how to use the sort() function.
+- Various class activities were used in helping to target DOM elements and using the timer.
+- [Bootstrap 4](https://getbootstrap.com/) was used to style the pages.
+
+---
+
+© 2020 Neil Gandhi
