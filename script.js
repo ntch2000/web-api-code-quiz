@@ -15,7 +15,9 @@ var answerChoices = document.getElementById("answers");
 // sets the index of the questionBank array to the first object
 
 // container that will have the answer feedback information on the score screen  -- displays after the last question of the quiz
-var feedbackContainer = document.getElementById("answer-feedback");
+var quizFeedbackContainer = document.getElementById("answer-feedback-quiz");
+
+var scoreFeedbackContainer = document.getElementById("answer-feedback-score");
 
 // gets the div element for the score screen
 var scorePage = document.getElementById("score-page");
@@ -112,9 +114,6 @@ function startTimer() {
 
 // function displays the questions and answers for the quiz
 function renderQuestions(index) {
-  //console.log(timerDisplay.textContent);
-  //console.log(finalScore);
-
   if (index === questionBank.length) {
     // stops the timer and executes the score screen function
     clearInterval(interval);
@@ -125,8 +124,6 @@ function renderQuestions(index) {
 
     // displays the question in the heading element
     headingQuestion.textContent = questionBank[index].question;
-
-    //console.log(headingQuestion.textContent);
 
     // loops through all of the answer options in the choices array
     for (var i = 0; i < questionBank[index].choices.length; i++) {
@@ -156,17 +153,40 @@ function checkAnswer(event) {
     questionBank[questionIndex].choices[answerIndex] ===
       questionBank[questionIndex].answer
   ) {
-    // if the answer is correct, the question index is incremented and the next question is displayed
+    // sets the answerFeedback variable to correct if the answer choice is correct
     answerFeedback = "Correct!";
-    questionIndex++;
-    renderQuestions(questionIndex);
   } else {
-    // if the answer is incorrect, 10 seconds are subtracted from the time, the question index is incremented and the next question is displayed
+    // sets the answerFeedback variable to wrong if the answer choice is incorrect and subtracts 10 seconds from the timer
     answerFeedback = "Wrong!";
     timeLeft -= 10;
-    questionIndex++;
-    renderQuestions(questionIndex);
   }
+  if (questionIndex === questionBank.length - 1) {
+    displayFeedback(scoreFeedbackContainer);
+  }
+  // displays the feedback message to the user on whether the choice was correct or wrong
+  displayFeedback(quizFeedbackContainer);
+  // increments to the next question and displays it to the page
+  questionIndex++;
+  renderQuestions(questionIndex);
+}
+
+// adds and removes the feedback information to the passed in container
+function displayFeedback(container) {
+  var time = 1;
+
+  // sets the class for the feedback div
+  container.setAttribute("class", "feedback mt-3 pt-2 col-8");
+  // sets the text based on the correct or wrong answer
+  container.textContent = answerFeedback;
+  var interval = setInterval(function () {
+    time--;
+    if (time === 0) {
+      // after 1/2 second, the class and text are cleared
+      container.innerHTML = "";
+      container.setAttribute("class", "");
+      clearInterval(interval);
+    }
+  }, 500);
 }
 
 // displays the score screen content after the game ends (either the user's time is up or they answer all questions).
@@ -181,62 +201,6 @@ function renderScoreScreen() {
   // gets the id of the paragraph element and outputs the user's score
   var scoreMessage = document.getElementById("score");
   scoreMessage.textContent = "Your final score is: " + finalScore;
-
-  console.log("Game over!");
-}
-
-// function to display either correct or wrong feedback to the user based on their answer choice
-function displayFeedback(container) {
-  // creates the div for the feedback
-  var feedBack = document.createElement("div");
-
-  // sets the attribute styles and id
-  feedBack.setAttribute("class", "feedback mt-3 pt-3");
-  feedBack.setAttribute("id", "answer-feedback");
-
-  // sets the text to either correct or wrong based on the user choice
-  feedBack.textContent = answerFeedback;
-
-  // add the div to the proper container passed in by the function
-  container.appendChild(feedBack);
-}
-
-// function to check whether the answer was correct or wrong
-function answerStatus() {
-  if (answerFeedback === "Correct!") {
-    // if the last question is being displayed, the message will be displayed in the feedbackContainer
-    if (questionIndex === questionBank.length) {
-      displayFeedback(feedbackContainer);
-    }
-    // displays the "Correct!" feedback message to the answerChoices container if the question is correct
-    displayFeedback(answerChoices);
-    feedbackTimer();
-    //console.log("Correct!");
-  } else {
-    // if the last question is being displayed, the message will be displayed in the feedbackContainer
-    if (questionIndex === questionBank.length) {
-      displayFeedback(feedbackContainer);
-    }
-    // displays the "Wrong!" feedback message to the answerChoices container if the question is correct
-    displayFeedback(answerChoices);
-    //console.log("Wrong!");
-    //console.log("Wrong!");
-    feedbackTimer();
-  }
-}
-
-// timer removes the feedback information of correct or wrong after 1 second
-function feedbackTimer() {
-  var time = 1;
-  var interval = setInterval(function () {
-    time--;
-    if (time === 0) {
-      console.log("times up");
-      var feedbackContent = document.getElementById("answer-feedback");
-      feedbackContent.parentNode.removeChild(feedbackContent);
-      clearInterval(interval);
-    }
-  }, 500);
 }
 
 // saves the user scores to an object in localStorage
@@ -269,7 +233,6 @@ startButton.addEventListener("click", startTimer);
 answerChoices.addEventListener("click", checkAnswer);
 
 // event to display whether the answer was correct or not
-answerChoices.addEventListener("click", answerStatus);
 
 // event to move to the highscores page once initials are entered after the quiz ends
 submitScoreBtn.addEventListener("click", function (event) {
@@ -285,8 +248,3 @@ submitScoreBtn.addEventListener("click", function (event) {
     window.location.href = "highscores.html";
   }
 });
-
-// inputInitials.addEventListener("keydown", function (event) {
-//   var regex = /[^a-z]/gi;
-//   inputInitials.value = inputInitials.value.replace(regex, "");
-// });
