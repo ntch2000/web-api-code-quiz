@@ -48,19 +48,19 @@ To see the code base for this page, visit my github page https://github.com/ntch
 
 ## Application Screenshots
 
-![Quiz Start Page](./screenshots/Quiz-Main-Page.jpg "Quiz Start Page")
+![Quiz Start Page](./Screenshots/Quiz-Main-Page.jpg "Quiz Start Page")
 _Sample application screenshot of the main quiz start page._
 
-![Correct Answer](./screenshots/correct-answer.jpg "Correct Answer")
+![Correct Answer](./Screenshots/correct-answer.jpg "Correct Answer")
 _Sample application screenshot of a question with a correct answer feedback._
 
-![Wrong Answer](./screenshots/wrong-answer.jpg "Wrong Answer")
+![Wrong Answer](./Screenshots/wrong-answer.jpg "Wrong Answer")
 _Sample application screenshot of a question with a wrong answer feedback._
 
-![Submit Initials and Score](./screenshots/initials-scores.jpg "Submit Initials and Score")
+![Submit Initials and Score](./Screenshots/initials-scores.jpg "Submit Initials and Score")
 _Sample application screenshot of the initials and score screen._
 
-![High Scores Page](./screenshots/high-scores.jpg "High Scores Page")
+![High Scores Page](.Screenshots/high-scores.jpg "High Scores Page")
 _Sample application screenshot of the high scores page._
 
 ## Usage
