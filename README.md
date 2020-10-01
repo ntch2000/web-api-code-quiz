@@ -60,7 +60,7 @@ _Sample application screenshot of a question with a wrong answer feedback._
 ![Submit Initials and Score](./Screenshots/initials-scores.jpg "Submit Initials and Score")
 _Sample application screenshot of the initials and score screen._
 
-![High Scores Page](.Screenshots/high-scores.jpg "High Scores Page")
+![High Scores Page](./Screenshots/high-scores.jpg "High Scores Page")
 _Sample application screenshot of the high scores page._
 
 ## Usage
