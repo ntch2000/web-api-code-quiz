@@ -1,4 +1,4 @@
-# web-api-code-quiz
+# Web-API-Code-Quiz
 
 Web application that allows users to take a code quiz on web APIs
 

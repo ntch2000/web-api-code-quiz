@@ -1,4 +1,4 @@
-console.log("hello world");
+// --------------- DOM Variables ----------------------
 
 var timerDisplay = document.getElementById("timer");
 // gets the main page container
@@ -22,6 +22,9 @@ var scorePage = document.getElementById("score-page");
 
 var submitScoreBtn = document.getElementById("submit-scores");
 
+var inputInitials = document.getElementById("initials");
+
+// --------------- JS Variables ----------------------
 var timeLeft = 75;
 var interval;
 var questionIndex = 0;
@@ -80,6 +83,8 @@ var questionBank = [
 
 // holds the scores
 var scoreArray = [];
+
+// --------------- Function Definitions ----------------------
 
 function startQuiz() {
   // sets the display of the instruction page to none, hiding it from the user
@@ -206,7 +211,7 @@ function answerStatus() {
     // displays the "Correct!" feedback message to the answerChoices container if the question is correct
     displayFeedback(answerChoices);
     feedbackTimer();
-    console.log("Correct!");
+    //console.log("Correct!");
   } else {
     // if the last question is being displayed, the message will be displayed in the feedbackContainer
     if (questionIndex === questionBank.length) {
@@ -214,8 +219,8 @@ function answerStatus() {
     }
     // displays the "Wrong!" feedback message to the answerChoices container if the question is correct
     displayFeedback(answerChoices);
-    console.log("Wrong!");
-    console.log("Wrong!");
+    //console.log("Wrong!");
+    //console.log("Wrong!");
     feedbackTimer();
   }
 }
@@ -238,6 +243,7 @@ function feedbackTimer() {
 function saveScores() {
   // get the user's initials from the input box
   var initials = document.getElementById("initials").value;
+  initials = initials.toUpperCase();
 
   // obtain the current scores object from local storage
   var storedScoreArray = JSON.parse(localStorage.getItem("userScores"));
@@ -252,15 +258,35 @@ function saveScores() {
   localStorage.setItem("userScores", JSON.stringify(scoreArray));
   console.log(scoreArray);
 }
-// when the start button is clicked, the quiz begins
+
+// --------------- Event Listeners ----------------------
+
+// when the start button is clicked, the quiz begins and the timer starts
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", startTimer);
+
+// listens to the answer button pressed to check the answer
 answerChoices.addEventListener("click", checkAnswer);
+
+// event to display whether the answer was correct or not
 answerChoices.addEventListener("click", answerStatus);
 
+// event to move to the highscores page once initials are entered after the quiz ends
 submitScoreBtn.addEventListener("click", function (event) {
   event.preventDefault();
-  saveScores();
-  console.log("this is a test");
-  window.location.href = "highscores.html";
+  //var regex = /^[A-za-z]/;
+  if (inputInitials.value === "") {
+    console.log(inputInitials);
+    //inputInitials.value = " ";
+    alert("You must enter your initials!");
+  } else {
+    saveScores();
+    console.log("this is a test");
+    window.location.href = "highscores.html";
+  }
 });
+
+// inputInitials.addEventListener("keydown", function (event) {
+//   var regex = /[^a-z]/gi;
+//   inputInitials.value = inputInitials.value.replace(regex, "");
+// });

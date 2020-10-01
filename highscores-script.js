@@ -1,4 +1,4 @@
-console.log("this is a test");
+// --------------- DOM Variables ----------------------
 
 // targets the ul to populate the scores list under
 var highScores = document.getElementById("scores");
@@ -10,7 +10,8 @@ var clearBtn = document.getElementById("clear-scores");
 //console.log(storedScoreArray);
 
 // when the page loads, the renderScore function  is executed
-window.onload = renderScores();
+
+// --------------- Function Definitions ----------------------
 
 // displays the scores from local storage on the page
 function renderScores() {
@@ -41,6 +42,12 @@ function renderScores() {
     }
   }
 }
+
+// --------------- Function Calls ----------------------
+
+window.onload = renderScores();
+
+// --------------- Event Listeners ----------------------
 
 // button returns the user to the quiz instructions page to try the quiz again
 goBackBtn.addEventListener("click", function (event) {
